@@ -24,9 +24,9 @@
 
 配置cnf
 > vi /etc/mysql/conf.d/cloudstack.cnf
-```bash
-[mysqld]
-server-id=master-01
+```diff
++[mysqld]
++server-id=master-01
 innodb_rollback_on_timeout=1
 innodb_lock_wait_timeout=600
 max_connections=350
@@ -132,9 +132,9 @@ Defaults:cloud !requiretty
 ```
 
 部署vhd工具
-> cd /usr/share/cloudstack-common/scripts/vm/hypervisor/xenserver
-> wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util
-> chmod 755 vhd-util
+> cd /usr/share/cloudstack-common/scripts/vm/hypervisor/xenserver  
+> wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util  
+> chmod 755 vhd-util  
 
 
 验证操作
@@ -143,13 +143,13 @@ Defaults:cloud !requiretty
 通过8080端口访问
 http://10.7.1.98:8080
 
-> Username: admin
-> Password: password
+> Username: admin  
+> Password: password  
 
 **Secondary Storage流量放行**
 
 GUI配置
-> {secstorage.allowed.internal.sites} 10.7.1.0/24
+> {secstorage.allowed.internal.sites}  ->  10.7.1.0/24
 
 
 数据库直接修改
