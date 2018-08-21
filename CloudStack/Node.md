@@ -22,11 +22,13 @@ auth_tcp = "none"
 ```
 
 > vi /etc/init/libvirt-bin.conf
+```
 env libvirtd_opts="-d -l"
+```
 
 配置网络
 
-必须先装kvm，否则没有bridge-utils
+`必须先装cloudstack-agent，否则无bridge-utils`
 
 > vi /etc/network/interfaces
 ```bash
@@ -44,3 +46,17 @@ iface cloudbr0 inet static
     gateway 10.7.1.1
     dns-nameservers 8.8.8.8
 ```
+
+验证操作
+---
+
+
+部署 XenServer6.5.0
+> XenServer-6.5.0-xenserver.org-install-cd.iso
+
+GUI操作
+
+> GUI操作 -> 创建pool
+
+配置bridge
+> xe-switch-network-backend bridge
