@@ -109,20 +109,33 @@ Defaults:cloud !requiretty
 > cloudstack-setup-management
 
 
-部署KVM
-系统VM模板
+部署KVM系统VM模板
 ```
 /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt \
 -m /export/secondary \
--u http://10.7.1.82/systemvmtemplate-4.11.1-kvm.qcow2.bz2 \
+-u http://cloudstack.apt-get.eu/systemvm/4.11/systemvmtemplate-4.11.1-kvm.qcow2.bz2 \
 -h kvm -F
 ```
 
-部署Xen
-系统VM模板
+部署Xen系统VM模板
 ```
 /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt \
 -m /export/secondary \
--u http://10.7.1.82/systemvmtemplate-4.11.1-xen.vhd.bz2 \
+-u http://cloudstack.apt-get.eu/systemvm/4.11/systemvmtemplate-4.11.1-xen.vhd.bz2 \
 -h xenserver -F
 ```
+
+部署vhd工具
+> cd /usr/share/cloudstack-common/scripts/vm/hypervisor/xenserver
+> wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util
+> chmod 755 vhd-util
+
+
+
+**Secondary Storage流量放行**
+
+> mysql -u cloud -pasd
+```
+UPDATE cloud.configuration SET value='10.7.1.0/24' WHERE name='secstorage.allowed.internal.sites';
+```
+
