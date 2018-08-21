@@ -150,11 +150,11 @@ Defaults:cloud !requiretty
 
 **Secondary Storage流量放行**
 
-GUI配置
+1. GUI配置
 > {secstorage.allowed.internal.sites}  ->  10.7.1.0/24
 
 
-数据库直接修改
+2. 数据库直接修改
 > mysql -u cloud -pasd
 ```
 UPDATE cloud.configuration SET value='10.7.1.0/24' WHERE name='secstorage.allowed.internal.sites';
