@@ -24,7 +24,7 @@
 
 配置cnf
 > vi /etc/mysql/conf.d/cloudstack.cnf
-```
+```bash
 [mysqld]
 server-id=master-01
 innodb_rollback_on_timeout=1
@@ -50,7 +50,8 @@ binlog-format = 'ROW'
 
 配置NFS
 > vi /etc/exports
-```
+
+```bash
 /export  *(rw,async,no_root_squash,no_subtree_check)
 ```
 
@@ -72,7 +73,7 @@ Domain = icooci.com
 ```
 
 测试NFS挂载
-```
+```bash
 touch  /export/primary/t1
 touch  /export/secondary/t2
 
