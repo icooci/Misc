@@ -24,9 +24,9 @@
 
 配置cnf
 > vi /etc/mysql/conf.d/cloudstack.cnf
-```diff
-+[mysqld]
-+server-id=master-01
+```bash
+[mysqld]
+server-id=master-01
 innodb_rollback_on_timeout=1
 innodb_lock_wait_timeout=600
 max_connections=350
@@ -44,8 +44,8 @@ binlog-format = 'ROW'
 
 
 创建NFS目录
-> mkdir -p /export/primary
-> mkdir -p /export/secondary
+> mkdir -p /export/primary  
+> mkdir -p /export/secondary  
 
 
 配置NFS
@@ -136,12 +136,14 @@ Defaults:cloud !requiretty
 > wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util  
 > chmod 755 vhd-util  
 
+<br />
+<br />
 
 验证操作
 ---
 
 通过8080端口访问
-http://10.7.1.98:8080
+> http://10.7.1.98:8080
 
 > Username: admin  
 > Password: password  
