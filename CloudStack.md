@@ -13,16 +13,16 @@
 安装NTP服务器
 > apt install openntpd
 
-关闭apparmor
 
+关闭apparmor
 > systemctl disable apparmor
 
-安装数据库
 
+安装数据库
 > apt install mysql-server
 
-配置cnf
 
+配置cnf
 > vi /etc/mysql/conf.d/cloudstack.cnf
 ```
 [mysqld]
@@ -34,6 +34,7 @@ log-bin=mysql-bin
 binlog-format = 'ROW'
 ```
 
+
 重启服务
 > service mysql restart
 
@@ -41,9 +42,11 @@ binlog-format = 'ROW'
 安装NFS
 > apt install nfs-kernel-server
 
+
 创建NFS目录
 > mkdir -p /export/primary
 > mkdir -p /export/secondary
+
 
 配置NFS
 > vi /etc/exports
@@ -93,6 +96,7 @@ deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
 安装Cloudstack Management
 > apt install cloudstack-management
 
+
 配置sudoers
 > chmod 640 /etc/sudoers
 
@@ -100,6 +104,7 @@ deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
 ```
 Defaults:cloud !requiretty
 ```
+
 
 初始化数据库
 > cloudstack-setup-databases cloud:asd@localhost --deploy-as=root:asd
@@ -131,9 +136,22 @@ Defaults:cloud !requiretty
 > chmod 755 vhd-util
 
 
+验证操作
+---
+
+通过8080端口访问
+http://10.7.1.98:8080
+
+> Username: admin
+> Password: password
 
 **Secondary Storage流量放行**
 
+GUI配置
+> {secstorage.allowed.internal.sites} 10.7.1.0/24
+
+
+数据库直接修改
 > mysql -u cloud -pasd
 ```
 UPDATE cloud.configuration SET value='10.7.1.0/24' WHERE name='secstorage.allowed.internal.sites';
