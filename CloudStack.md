@@ -43,5 +43,86 @@ binlog-format = 'ROW'
 
 创建NFS目录
 > mkdir -p /export/primary
+> mkdir -p /export/secondary
 
-> ir -p /export/secondary
+配置NFS
+> vi /etc/exports
+```
+/export  *(rw,async,no_root_squash,no_subtree_check)
+```
+
+> mkdir /etc/sysconfig
+
+> vi /etc/sysconfig/nfs
+```
+LOCKD_TCPPORT=32803
+LOCKD_UDPPORT=32769
+MOUNTD_PORT=892
+RQUOTAD_PORT=875
+STATD_PORT=662
+STATD_OUTGOING_PORT=2020
+```
+
+> vi /etc/idmapd.conf
+```
+Domain = icooci.com
+```
+
+测试NFS挂载
+```
+touch  /export/primary/t1
+touch  /export/secondary/t2
+
+mount -t nfs 10.7.1.98:/export/primary /mnt/
+ls -al /mnt
+umount /mnt
+```
+
+配置CloudStack源
+> vi /etc/apt/sources.list.d/cloudstack.list
+```
+deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
+```
+
+添加APT-KEY
+> wget -O - http://cloudstack.apt-get.eu/release.asc|apt-key add -
+
+更新APT源
+> apt update
+
+安装Cloudstack Management
+> apt install cloudstack-management
+
+配置sudoers
+> chmod 640 /etc/sudoers
+
+> vi /etc/sudoers
+```
+Defaults:cloud !requiretty
+```
+
+初始化数据库
+> cloudstack-setup-databases cloud:asd@localhost --deploy-as=root:asd
+
+
+启动CSM
+> cloudstack-setup-management
+
+
+部署KVM
+系统VM模板
+```
+/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt \
+-m /export/secondary \
+-u http://10.7.1.82/systemvmtemplate-4.11.1-kvm.qcow2.bz2 \
+-h kvm -F
+```
+
+部署Xen
+系统VM模板
+```
+/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt \
+-m /export/secondary \
+-u http://10.7.1.82/systemvmtemplate-4.11.1-xen.vhd.bz2 \
+-h xenserver -F
+```
