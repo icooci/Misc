@@ -81,8 +81,10 @@ iface cloudbr0 inet static
 验证操作
 ---
 
-安装部署 XenServer 6.5.0  
-`http://downloadns.citrix.com.edgesuite.net/akdlm/10175/XenServer-6.5.0-xenserver.org-install-cd.iso`
+安装部署 XenServer 6.5.0
+```
+http://downloadns.citrix.com.edgesuite.net/akdlm/10175/XenServer-6.5.0-xenserver.org-install-cd.iso
+```
 
 GUI操作
 > GUI操作 -> 创建pool
