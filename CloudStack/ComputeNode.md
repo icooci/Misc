@@ -1,9 +1,38 @@
 ## KVM计算节点
 
-关闭apparomr
+配置Hosts
+
+> vi /etc/hosts
+```
+127.0.0.1       localhost
+10.7.1.98       cloudstack
+10.7.1.98       icooci.com
+10.7.1.98       cloudstack.icooci.com
+```
+
+关闭Apparomr
 > systemctl disable apparmor
 
-安装Agent
+配置CloudStack源
+> vi /etc/apt/sources.list.d/cloudstack.list
+```
+deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
+```
+
+添加APT-KEY
+> wget -O - http://cloudstack.apt-get.eu/release.asc|apt-key add -
+
+更新APT源
+> apt update
+
+安装NTP
+> apt install openntpd
+
+安装NFS
+> apt install nfs-client
+
+
+安装Cloudstack Agent
 > apt install cloudstack-agent
 
 配置libvirt
