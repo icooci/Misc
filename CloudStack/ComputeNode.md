@@ -19,7 +19,7 @@
 deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
 ```
 
-添加APT-KEY
+添加APT-KEY  
 `wget -O - http://cloudstack.apt-get.eu/release.asc|apt-key add -`
 
 更新APT源
