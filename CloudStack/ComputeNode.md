@@ -20,7 +20,7 @@ deb http://cloudstack.apt-get.eu/ubuntu xenial 4.11
 ```
 
 添加APT-KEY
-> wget -O - http://cloudstack.apt-get.eu/release.asc|apt-key add -
+`wget -O - http://cloudstack.apt-get.eu/release.asc|apt-key add -`
 
 更新APT源
 > apt update
@@ -57,7 +57,7 @@ env libvirtd_opts="-d -l"
 
 配置网络
 
-`必须先装cloudstack-agent，否则无bridge-utils`
+`PS: 必须先装cloudstack-agent，否则无bridge-utils`
 
 > vi /etc/network/interfaces
 ```bash
